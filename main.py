@@ -12,7 +12,8 @@ def membuat_segi_tiga_bertua(img):
     ])
     mask = np.zeros_like(img)
     cv2.fillPoly(mask, polygon, 255)
-    return mask
+    mask_img = cv2.bitwise_and(img, mask)
+    return mask_img
 
 img = cv2.imread('src/img_test.jpg')
 imgCpy = np.copy(img)
@@ -22,5 +23,6 @@ canny = cv2.Canny(blur, 50, 150)
 
 # plt.imshow(canny)
 # plt.show()
-cv2.imshow("result", membuat_segi_tiga_bertua(canny))
+crop_img = membuat_segi_tiga_bertua(canny)
+cv2.imshow("hasil", crop_img)
 cv2.waitKey(0)
